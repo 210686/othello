@@ -1,10 +1,22 @@
 import java.awt.*;
 import javax.swing.*;
 public class Main{
+    /* private fields */
+    private static printBoard pb;
+    private static printResult pr;
+    private static Result newR;
+    
+    /* non-main methods */
+    public void getResult(){
+        pr.addResult(newR);
+    }
+    
+    /* main method */
     public static void main(String[] args){
         /* Initialize classes */
-        printBoard pb = new printBoard();
-        printResult pr = new printResult();
+        pb = new printBoard();
+        pr = new printResult();
+        newR = new Result();
         
         /* Initialize Runnable r */
         Runnable r = new Runnable(){

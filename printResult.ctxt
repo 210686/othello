@@ -2,4 +2,8 @@
 comment0.target=printResult
 comment1.params=
 comment1.target=printResult()
-numComments=2
+comment2.params=res
+comment2.target=void\ addResult(Result)
+comment3.params=
+comment3.target=void\ printConsole()
+numComments=4

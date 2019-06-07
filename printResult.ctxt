@@ -2,8 +2,11 @@
 comment0.target=printResult
 comment1.params=
 comment1.target=printResult()
+comment1.text=Initialize\ contructor
 comment2.params=res
 comment2.target=void\ addResult(Result)
+comment2.text=Add\ a\ new\ Result\ into\ resArr
 comment3.params=
 comment3.target=void\ printConsole()
+comment3.text=Prints\ the\ contents\ of\ resArr
 numComments=4

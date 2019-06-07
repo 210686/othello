@@ -2,4 +2,5 @@
 comment0.target=Result
 comment1.params=
 comment1.target=Result()
+comment1.text=Initialize\ contructor
 numComments=2

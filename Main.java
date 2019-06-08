@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 public class Main{
     /* private fields */
-    private static printBoard pb;
+    private static printBoard pb = new printBoard();
     private static printResult pr;
     private static Result newR;
     
@@ -10,11 +10,13 @@ public class Main{
     public void getResult(){
         pr.addResult(newR);
     }
+    public static JComponent getFrame(){
+        return pb.getBoard();
+    }
     
     /* main method */
     public static void main(String[] args){
         /* Initialize classes */
-        pb = new printBoard();
         pr = new printResult();
         newR = new Result();
         
@@ -24,7 +26,7 @@ public class Main{
             public void run(){
                 /* Initialize JFrame f */
                 JFrame f = new JFrame("Othello");
-                f.add(new JLabel("Hello World"));
+                f.add(getFrame());
                 
                 /* Add settings to JFrame f */
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

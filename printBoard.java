@@ -5,24 +5,32 @@ import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import javax.swing.*;
 import javax.swing.border.*;
 public class printBoard{
-    private final static Color BG = new Color(0, 102, 0);
-
     private JButton[][] boardSquares = new JButton[8][8];
     private JPanel board;
     private JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JLabel label;
     private JToolBar tools = new JToolBar();
     private JButton b1;
+    private Board newBoard = new Board();
 
     public printBoard(){
         gui.removeAll();
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         tools.setFloatable(false);
         gui.add(tools, BorderLayout.PAGE_START);
-        tools.add(b1 = new JButton("New")); //Add functionality
+        tools.add(b1 = new JButton("New"));
+        /* Function of b1 */
+        b1.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent a){
+                    System.out.println("Hello World");
+                    new printBoard();
+                }
+            });
+
         tools.addSeparator();
         tools.add(label = new JLabel("")); //Add text
         tools.addSeparator();
@@ -43,17 +51,13 @@ public class printBoard{
             for (int j = 0; j < 8; j++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
-                
+
                 /* Add graphics here */
                 b.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                
-                BufferedImage bi = new BufferedImage(64, 64, BufferedImage.TYPE_3BYTE_BGR);
-                Graphics2D graphics = bi.createGraphics();
-                graphics.setPaint(BG);
-                graphics.fillRect(0, 0, bi.getWidth(), bi.getHeight());
-                ImageIcon icon = new ImageIcon(bi);
-                
-                b.setIcon(icon);
+                try{
+                    ImageIcon icon = new ImageIcon(newBoard.getImage(i, j));
+                    b.setIcon(icon);
+                }catch(NullPointerException e){}
                 b.setBackground(Color.BLACK);
                 b.setOpaque(true);
 
@@ -80,8 +84,22 @@ public class printBoard{
         }
     }
 
-    /* return stuff back */
+    /* return Board back */
     public JComponent getBoard(){
         return gui;
+    }
+
+    public JPanel drawCircle(){
+        JPanel p = new JPanel() {
+                @Override
+                public void paintComponent(Graphics g) {
+                    Graphics2D g2 = (Graphics2D) g;
+                    Shape circle = new Ellipse2D.Double(16, 16, 64, 64);
+                    g2.draw(circle);
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_ON);
+                }
+            };
+        return p;
     }
 }

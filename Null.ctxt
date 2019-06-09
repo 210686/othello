@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=White
+comment0.target=Null
 comment1.params=
-comment1.target=White()
+comment1.target=Null()
 comment2.params=
 comment2.target=java.awt.image.BufferedImage\ getButtonGraphics()
 comment2.text=Add\ functions\ from\ Piece\ here

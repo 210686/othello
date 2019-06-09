@@ -2,4 +2,7 @@
 comment0.target=Board
 comment1.params=
 comment1.target=Board()
-numComments=2
+comment1.text=Initialize\ constructor
+comment2.params=i\ j
+comment2.target=java.awt.image.BufferedImage\ getImage(int,\ int)
+numComments=3

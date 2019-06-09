@@ -12,13 +12,20 @@ public class printBoard{
     private JButton[][] boardSquares = new JButton[8][8];
     private JPanel board;
     private JPanel gui = new JPanel(new BorderLayout(3, 3));
-    private JLabel label;
     private JToolBar tools = new JToolBar();
     private JButton b1;
     private Board newBoard = new Board();
-
+    private int order = 1;
     public printBoard(){
+        printHead();
+    }
+    public void update(){
         gui.removeAll();
+        tools.removeAll();
+        printHead();
+    }
+    
+    public void printHead(){
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         tools.setFloatable(false);
         gui.add(tools, BorderLayout.PAGE_START);
@@ -26,23 +33,34 @@ public class printBoard{
         /* Function of b1 */
         b1.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent a){
-                    System.out.println("Hello World");
-                    new printBoard();
+                    newBoard = new Board();
+                    order = 1;
+                    update();
                 }
             });
 
         tools.addSeparator();
-        tools.add(label = new JLabel("")); //Add text
+        if(order == 1){
+            tools.add(new JLabel("Player 1's Turn"));
+        }
+        else{
+            tools.add(new JLabel("Player 2's Turn"));
+        }
+        order = (order++) % 2 + 1;
         tools.addSeparator();
 
+        printMain();
+    }
+    public void printMain(){
         board = new JPanel(new GridLayout(0, 9));
         board.setBorder(new LineBorder(Color.BLACK));
-        gui.add(board);
-
+        
+        /* Action for the board Buttons */
         ActionListener listener = new ActionListener(){
                 int x = -1, y = -1;
                 public void actionPerformed(ActionEvent a){
                     /* Add functionality */
+                    update();
                 }
             };
 
@@ -54,10 +72,8 @@ public class printBoard{
 
                 /* Add graphics here */
                 b.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                try{
-                    ImageIcon icon = new ImageIcon(newBoard.getImage(i, j));
-                    b.setIcon(icon);
-                }catch(NullPointerException e){}
+                ImageIcon icon = new ImageIcon(newBoard.getImage(i, j));
+                b.setIcon(icon);
                 b.setBackground(Color.BLACK);
                 b.setOpaque(true);
 
@@ -69,7 +85,6 @@ public class printBoard{
         for (int i = 0; i < 8; i++) {
             board.add(new JLabel(String.valueOf(i + 1), SwingConstants.CENTER));
         }
-
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 switch (j) {
@@ -82,24 +97,11 @@ public class printBoard{
                 }
             }
         }
+        gui.add(board);
     }
 
     /* return Board back */
     public JComponent getBoard(){
         return gui;
-    }
-
-    public JPanel drawCircle(){
-        JPanel p = new JPanel() {
-                @Override
-                public void paintComponent(Graphics g) {
-                    Graphics2D g2 = (Graphics2D) g;
-                    Shape circle = new Ellipse2D.Double(16, 16, 64, 64);
-                    g2.draw(circle);
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                }
-            };
-        return p;
     }
 }

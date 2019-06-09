@@ -1,6 +1,13 @@
 #BlueJ class context
 comment0.target=Piece
 comment1.params=
-comment1.target=java.awt.image.BufferedImage\ getButtonGraphics()
-comment1.text=Add\ methods\ here
-numComments=2
+comment1.target=int\ getOrder()
+comment1.text=Abstract\ classes
+comment2.params=
+comment2.target=Piece()
+comment2.text=Concrete\ classes
+comment3.params=
+comment3.target=java.awt.image.BufferedImage\ drawCircle()
+comment4.params=cFill\ cOutline
+comment4.target=java.awt.image.BufferedImage\ drawCircle(java.awt.Color,\ java.awt.Color)
+numComments=5

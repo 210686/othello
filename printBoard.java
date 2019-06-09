@@ -72,7 +72,7 @@ public class printBoard{
 
                 /* Add graphics here */
                 b.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                ImageIcon icon = new ImageIcon(newBoard.getImage(i, j));
+                ImageIcon icon = new ImageIcon(newBoard.getImage(order, i, j));
                 b.setIcon(icon);
                 b.setBackground(Color.BLACK);
                 b.setOpaque(true);

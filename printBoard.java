@@ -16,6 +16,7 @@ public class printBoard{
     private JButton b1;
     private Board newBoard = new Board();
     private int order = 1;
+    private boolean gameover = false;
     public printBoard(){
         printHead();
     }
@@ -41,15 +42,24 @@ public class printBoard{
             });
 
         tools.addSeparator();
-        if(order == 1){
-            tools.add(new JLabel("Player 1's Turn"));
+        int b = newBoard.countBlack();
+        int w = newBoard.countWhite();
+        if(b == 0 || w == 0 || b + w == 64){
+            tools.add(new JLabel("Game Over"));
+            gameover = true;
+        }
+        else if(order == 1){
+            tools.add(new JLabel("White Turn"));
         }
         else{
-            tools.add(new JLabel("Player 2's Turn"));
+            tools.add(new JLabel("Black Turn"));
         }
         order = (order++) % 2 + 1;
+        
         tools.addSeparator();
-
+        tools.add(new JLabel("Black: " + String.valueOf(b)));
+        tools.add(new JLabel(" White: " + String.valueOf(w)));
+        
         printMain();
     }
 
@@ -63,8 +73,7 @@ public class printBoard{
                     Object source = a.getSource();
                     for (int i = 0; i < 8; i++) {
                         for (int j = 0; j < 8; j++) { 
-                            if (source == boardSquares[i][j]) {
-                                newBoard.check(order, i, j);
+                            if (source == boardSquares[i][j] && newBoard.check(order, i, j)){
                                 update();
                             }
                         }
@@ -73,6 +82,7 @@ public class printBoard{
             };
 
         Insets buttonMargin = new Insets(0,0,0,0);
+        int available = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 JButton b = new JButton();
@@ -86,7 +96,15 @@ public class printBoard{
                 b.setOpaque(true);
 
                 boardSquares[i][j] = b;
+                
+                /* check for available spaces */
+                if(available == 0 && newBoard.hasMove() == 0){
+                    available++;
+                }
             }
+        }
+        if(newBoard.hasMove() == 0){
+            update();
         }
 
         board.add(new JLabel(""));
@@ -105,6 +123,7 @@ public class printBoard{
                 }
             }
         }
+
         gui.add(board);
     }
 

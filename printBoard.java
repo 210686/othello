@@ -19,12 +19,13 @@ public class printBoard{
     public printBoard(){
         printHead();
     }
+
     public void update(){
         gui.removeAll();
         tools.removeAll();
         printHead();
     }
-    
+
     public void printHead(){
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         tools.setFloatable(false);
@@ -51,16 +52,23 @@ public class printBoard{
 
         printMain();
     }
+
     public void printMain(){
         board = new JPanel(new GridLayout(0, 9));
         board.setBorder(new LineBorder(Color.BLACK));
-        
+
         /* Action for the board Buttons */
         ActionListener listener = new ActionListener(){
-                int x = -1, y = -1;
                 public void actionPerformed(ActionEvent a){
-                    /* Add functionality */
-                    update();
+                    Object source = a.getSource();
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) { 
+                            if (source == boardSquares[i][j]) {
+                                newBoard.check(order, i, j);
+                                update();
+                            }
+                        }
+                    }
                 }
             };
 

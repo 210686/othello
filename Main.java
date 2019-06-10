@@ -16,6 +16,7 @@ public class Main{
     
     /* main method */
     public static void main(String[] args){
+        System.out.print("\f");
         /* Initialize classes */
         pr = new printResult();
         newR = new Result();

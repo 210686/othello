@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import javax.swing.*;
 import javax.swing.border.*;
+import java.util.ArrayList;
 public class printBoard{
     private JButton[][] boardSquares = new JButton[8][8];
     private JPanel board;
@@ -17,13 +18,15 @@ public class printBoard{
     private Board newBoard = new Board();
     private int order = 1;
     private boolean gameover = false;
+    private ArrayList<Result> resArr = new ArrayList<Result>();
     public printBoard(){
-        printHead();
+        update();
     }
 
     public void update(){
         gui.removeAll();
         tools.removeAll();
+        newBoard.Available(order);
         printHead();
     }
 
@@ -36,7 +39,9 @@ public class printBoard{
         b1.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent a){
                     newBoard = new Board();
+                    resArr.add(new Result(order));
                     order = 1;
+                    gameover = false;
                     update();
                 }
             });
@@ -49,18 +54,23 @@ public class printBoard{
             gameover = true;
         }
         else if(order == 1){
-            tools.add(new JLabel("White Turn"));
+            tools.add(new JLabel("Black's Turn"));
         }
         else{
-            tools.add(new JLabel("Black Turn"));
+            tools.add(new JLabel("White's Turn"));
         }
         order = (order++) % 2 + 1;
-        
+        if(newBoard.countAv() == 0 && !gameover){
+            update();
+        }
+
         tools.addSeparator();
         tools.add(new JLabel("Black: " + String.valueOf(b)));
         tools.add(new JLabel(" White: " + String.valueOf(w)));
         
-        printMain();
+        if(!gameover){
+            printMain();
+        }
     }
 
     public void printMain(){
@@ -73,8 +83,10 @@ public class printBoard{
                     Object source = a.getSource();
                     for (int i = 0; i < 8; i++) {
                         for (int j = 0; j < 8; j++) { 
-                            if (source == boardSquares[i][j] && newBoard.check(order, i, j)){
-                                update();
+                            if (source == boardSquares[i][j]){
+                                if(newBoard.move(order, i, j)){
+                                    update();
+                                }
                             }
                         }
                     }
@@ -82,7 +94,6 @@ public class printBoard{
             };
 
         Insets buttonMargin = new Insets(0,0,0,0);
-        int available = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 JButton b = new JButton();
@@ -96,15 +107,7 @@ public class printBoard{
                 b.setOpaque(true);
 
                 boardSquares[i][j] = b;
-                
-                /* check for available spaces */
-                if(available == 0 && newBoard.hasMove() == 0){
-                    available++;
-                }
             }
-        }
-        if(newBoard.hasMove() == 0){
-            update();
         }
 
         board.add(new JLabel(""));

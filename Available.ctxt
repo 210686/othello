@@ -4,6 +4,7 @@ comment1.params=
 comment1.target=Available()
 comment2.params=
 comment2.target=java.awt.image.BufferedImage\ drawCircle()
+comment2.text=Add\ functions\ from\ Piece\ here
 comment3.params=
 comment3.target=int\ getOrder()
 numComments=4

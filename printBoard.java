@@ -1,11 +1,7 @@
 import java.awt.*;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.util.ArrayList;
@@ -20,6 +16,8 @@ public class printBoard{
     private int order = 1;
     private boolean gameover = false;
     private ArrayList<Result> resArr = new ArrayList<Result>();
+    
+    /* constructor */
     public printBoard(){
         update();
     }
@@ -38,6 +36,7 @@ public class printBoard{
         
         int b = newBoard.countBlack();
         int w = newBoard.countWhite();
+        
         /* Function of b1 */
         tools.add(b1 = new JButton("New"));
         b1.addActionListener(new ActionListener(){
@@ -59,7 +58,7 @@ public class printBoard{
             });
         tools.addSeparator();
         
-        /* Function of b2 */
+        /* Function of b3 */
         tools.add(b3 = new JButton("Random"));
         b3.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent a){
@@ -75,7 +74,6 @@ public class printBoard{
                     }
                 }
             });
-
         tools.addSeparator();
         
         if(b == 0 || w == 0 || b + w == 64){

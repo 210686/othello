@@ -44,6 +44,7 @@ public class printResult{
                 str += String.valueOf(res.get(0).getBlack());
                 str += "  Black";
             }
+            /* The contents of resArr */
             str += "\n";
             
             count++;
@@ -54,9 +55,8 @@ public class printResult{
     /* Initialize contructor */
     public printResult(ArrayList<Result> res){
         this.res = res;
-
         System.out.print("\f" + sortByNumber());
     }
 
-    /* Prints the contents of resArr */
+
 }

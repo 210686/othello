@@ -2,6 +2,7 @@
 comment0.target=printBoard
 comment1.params=
 comment1.target=printBoard()
+comment1.text=constructor
 comment2.params=
 comment2.target=void\ update()
 comment3.params=

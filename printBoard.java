@@ -9,12 +9,13 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.util.ArrayList;
+import java.lang.Math;
 public class printBoard{
     private JButton[][] boardSquares = new JButton[8][8];
     private JPanel board;
     private JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JToolBar tools = new JToolBar();
-    private JButton b1;
+    private JButton b1, b2, b3;
     private Board newBoard = new Board();
     private int order = 1;
     private boolean gameover = false;
@@ -34,24 +35,53 @@ public class printBoard{
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         tools.setFloatable(false);
         gui.add(tools, BorderLayout.PAGE_START);
-        tools.add(b1 = new JButton("New"));
+        
+        int b = newBoard.countBlack();
+        int w = newBoard.countWhite();
         /* Function of b1 */
+        tools.add(b1 = new JButton("New"));
         b1.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent a){
                     newBoard = new Board();
-                    resArr.add(new Result(order));
                     order = 1;
                     gameover = false;
                     update();
                 }
             });
+        tools.addSeparator();
+        
+        /* Function of b2 */
+        tools.add(b2 = new JButton("Result"));
+        b2.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent a){
+                    new printResult(resArr);
+                }
+            });
+        tools.addSeparator();
+        
+        /* Function of b2 */
+        tools.add(b3 = new JButton("Random"));
+        b3.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent a){
+                    int overflow = 0;
+                    while(!gameover && overflow < 60){
+                        int i = (int)(Math.random() * 8);
+                        int j = (int)(Math.random() * 8);
+                        if(newBoard.move(order, i, j)){
+                            update();
+                            break;
+                        }
+                        overflow++;
+                    }
+                }
+            });
 
         tools.addSeparator();
-        int b = newBoard.countBlack();
-        int w = newBoard.countWhite();
+        
         if(b == 0 || w == 0 || b + w == 64){
             tools.add(new JLabel("Game Over"));
             gameover = true;
+            resArr.add(new Result(b, w));
         }
         else if(order == 1){
             tools.add(new JLabel("Black's Turn"));
@@ -130,7 +160,7 @@ public class printBoard{
         gui.add(board);
     }
 
-    /* return Board back */
+    /* return  getters */
     public JComponent getBoard(){
         return gui;
     }

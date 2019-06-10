@@ -1,13 +1,11 @@
 #BlueJ class context
 comment0.target=Main
 comment1.params=
-comment1.target=void\ getResult()
+comment1.target=javax.swing.JComponent\ getFrame()
 comment1.text=non-main\ methods
-comment2.params=
-comment2.target=javax.swing.JComponent\ getFrame()
-comment3.params=args
-comment3.target=void\ main(java.lang.String[])
-comment3.text=main\ method
-comment4.params=
-comment4.target=void\ run()
-numComments=5
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+comment2.text=main\ method
+comment3.params=
+comment3.target=void\ run()
+numComments=4

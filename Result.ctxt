@@ -1,6 +1,10 @@
 #BlueJ class context
 comment0.target=Result
-comment1.params=
-comment1.target=Result()
-comment1.text=Initialize\ contructor
-numComments=2
+comment1.params=black\ white
+comment1.target=Result(int,\ int)
+comment2.params=
+comment2.target=int\ getBlack()
+comment2.text=Return\ getters
+comment3.params=
+comment3.target=int\ getWhite()
+numComments=4

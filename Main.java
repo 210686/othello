@@ -3,13 +3,8 @@ import javax.swing.*;
 public class Main{
     /* private fields */
     private static printBoard pb = new printBoard();
-    private static printResult pr;
-    private static Result newR;
     
     /* non-main methods */
-    public void getResult(){
-        pr.addResult(newR);
-    }
     public static JComponent getFrame(){
         return pb.getBoard();
     }
@@ -17,9 +12,6 @@ public class Main{
     /* main method */
     public static void main(String[] args){
         System.out.print("\f");
-        /* Initialize classes */
-        pr = new printResult();
-        newR = new Result();
         
         /* Initialize Runnable r */
         Runnable r = new Runnable(){
